@@ -1,0 +1,8 @@
+# Ignore build
+build/
+
+# Ignore vscode and other editor files
+.vscode/
+
+# Ignore Visual Studio files
+.vs/
