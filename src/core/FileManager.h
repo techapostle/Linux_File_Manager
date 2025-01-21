@@ -8,7 +8,10 @@
 namespace linux_file_manager {
 namespace core {
 
-
+/**
+ * @brief A class for managing files and directories
+ * @details This class provides functions for listing the contents of a directory, checking if a file or directory exists, creating a new directory, removing a file or directory, and getting the size of a file or directory.
+ */
 class FileManager {
 public:
   /**
