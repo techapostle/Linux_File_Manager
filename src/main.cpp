@@ -20,7 +20,7 @@
 #include "core/FileManager.h" // include the FileManager class
 
 // #define __TEST__ // uncomment this line to enable testing
-#ifdef __TEST__
+#ifdef __BASIC_LFM_TEST__
 
 int main(int argc, char *argv[]) {
   using namespace linux_file_manager::core;
