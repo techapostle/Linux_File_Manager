@@ -19,6 +19,18 @@
 
 #include "core/FileManager.h" // include the FileManager class
 
+#define __BASIC_MAIN_TEST__ // uncomment this line to enable main
+#ifdef __BASIC_MAIN_TEST__
+
+int main() {
+
+  return 0
+}
+
+#endif // __BASIC_MAIN_TEST__
+
+
+
 // #define __BASIC_LFM_TEST__ // uncomment this line to enable testing
 #ifdef __BASIC_LFM_TEST__
 
@@ -97,4 +109,4 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-#endif
+#endif // __BASIC_LFM_TEST__
