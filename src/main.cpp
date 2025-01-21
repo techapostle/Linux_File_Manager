@@ -1,19 +1,30 @@
-// LINUX FILE MANAGER
-// -------------------
-// author:  @techapostle (Kian Dadkhah)
-// date:    1/18/2025
-// license: GPL-3.0
-// version: 0.1.0 (alpha)
-// -------------------
-// description:
-// This is a simple file manager for Linux systems. It is written in C++ and uses the ncurses library for the user interface.
-// -------------------
-// usage:
-// $ ./lfm
-// -------------------
-// dependencies:
-// - ncurses
-// -------------------
+/**
+ * @file main.cpp
+ * @brief A simple file manager for Linux systems.
+ * 
+ * This file contains the main entry point for the Linux File Manager application.
+ * It is written in C++ and uses the ncurses library for the user interface.
+ * 
+ * @author  @techapostle (Kian Dadkhah)
+ * @date    1/18/2025
+ * @license GPL-3.0
+ * @version 0.1.0 (alpha)
+ * 
+ * @section DESCRIPTION
+ * This is a simple file manager for Linux systems. It is written in C++ and uses the ncurses library for the user interface.
+ * 
+ * @section USAGE
+ * $ ./lfm
+ * 
+ * @section DEPENDENCIES
+ * - ncurses
+ * 
+ * @section TESTING
+ * Uncomment the appropriate define directive to enable testing:
+ * - __BASIC_MAIN_TEST__ for basic main function testing.
+ * - __BASIC_LFM_TEST__ for testing all current functions.
+ */
+
 
 #include <iostream> // for error reporting
 
