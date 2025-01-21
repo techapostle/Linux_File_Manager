@@ -14,13 +14,29 @@ namespace tui {
 class TUI {
 public:
   /**
+   * @brief Construct a new TUI object
+   */
+  TUI();
+
+  /**
+   * @brief Destroy the TUI object
+   */
+  ~TUI();
+
+  /**
    * @brief Run the text-based user interface
    * @return void
    */
   void run();
 
 private:
-  // Helper functions for navigation and actions
+  // Helper functions
+
+  /**
+   * @brief Initialize the text-based user interface
+   * @return void
+   */
+  void initialize();
 
   /**
    * @brief Display the directory
@@ -30,11 +46,21 @@ private:
   void displayDirectory(const std::string& path);
 
   /**
+   * @brief Cleanup the text-based user interface
+   * @return void
+   */
+  void cleanup();
+
+  /**
    * @brief Handle user input
    * @param path The path to the current directory
    * @return void
    */
   void handleUserInput(const std::string& path);
+
+  // State variables
+  std::vector<std::string> directoryContents; // The names of the files and directories in the current directory
+  int selectedIndex; // The index of the selected file or directory
 };
 
 } // namespace tui
