@@ -24,7 +24,7 @@
 
 int main() {
 
-  return 0
+  return 0;
 }
 
 #endif // __BASIC_MAIN_TEST__
