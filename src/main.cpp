@@ -30,8 +30,8 @@
 
 #include "core/FileManager.h" // include the FileManager class
 
-#define __BASIC_MAIN_TEST__ // uncomment this line to enable main
-#ifdef __BASIC_MAIN_TEST__
+#define __BASIC_MAIN__ // uncomment this line to enable main
+#ifdef __BASIC_MAIN__
 
 int main() {
 

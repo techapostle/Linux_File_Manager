@@ -2,8 +2,8 @@
 #include <ncurses.h>
 #include <filesystem>
 
-#include "core/FileManager.h"
-#include "tui/TUI.h"
+#include "../core/FileManager.h"
+#include "TUI.h"
 
 namespace linux_file_manager {
 namespace tui {
@@ -40,7 +40,7 @@ void TUI::run() {
     this->directoryContents = FileManager::listDirectory(currentPath);
 
     // Display the directory
-    displayDirectory(path);
+    displayDirectory(currentPath);
 
     // Handle user input
     int key = getch(); // Get a character from the user
