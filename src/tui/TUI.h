@@ -41,11 +41,25 @@ private:
   void initialize();
 
   /**
+   * @brief Display the header with program information and the current directory
+   * @param currentPath The current directory path
+   * @return void
+   */
+  void displayHeader(const std::string& currentPath);
+
+  /**
    * @brief Display the directory
    * @param path The path to the directory
    * @return void
    */
   void displayDirectory(const std::string& path);
+
+  /**
+   * @brief Display the footer with error messages and legend keys
+   * @param errorMessage The error message to display
+   * @return void
+   */
+  void displayFooter(const std::string& errorMessage);
 
   /**
    * @brief Cleanup the text-based user interface
