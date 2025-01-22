@@ -1,5 +1,11 @@
 # This script is used to clean the build directory and rebuild the project
 
+# get the directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# change to the scripts directory
+cd $DIR
+
 # Remove the build directory (../build) if it exists
 if [ -d "../build" ]; then
     rm -rf ../build
@@ -16,3 +22,6 @@ cmake ..
 
 # Build the project
 make
+
+# return to the previous directory
+cd -
