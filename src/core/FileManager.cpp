@@ -17,12 +17,12 @@ std::vector<std::string> FileManager::listDirectory(const std::string& path) {
   try {
     // Iterate over the contents of the directory specified by the path
     for (const auto& entry : fs::directory_iterator(path)) {
-      // Add the name of the file or directory to the vector
-      contents.push_back(entry.path().filename().string());
+      // Add the full path of the file or directory to the contents vector
+      contents.push_back(entry.path().string());
     }
   } catch (const fs::filesystem_error& e) {
-    // If an error occurs, print an error message and return an empty vector
-    std::cerr << "Error listing directory: " << e.what() << std::endl;
+    // If an error occurs, print an error message
+    std::cerr << "\nError listing directory contents: " << e.what() << std::endl;
   }
 
   return contents; // return the vector of contents
@@ -46,7 +46,7 @@ bool FileManager::createDirectory(const std::string& path) {
     return fs::create_directory(path); // create_directory returns true if the directory was created successfully
   } catch (const fs::filesystem_error& e) {
     // If an error occurs, print an error message and return false
-    std::cerr << "Error creating directory: " << e.what() << std::endl;
+    std::cerr << "\nError creating directory: " << e.what() << std::endl;
   }
 
   return false; // return false if an error occurred
@@ -65,7 +65,7 @@ bool FileManager::deletePath(const std::string& path) {
     return fs::remove_all(path) > 0; // remove_all returns the number of files or directories removed
   } catch (const fs::filesystem_error& e) {
     // If an error occurs, print an error message and return false
-    std::cerr << "Error deleting file or directory: " << e.what() << std::endl;
+    std::cerr << "\nError deleting file or directory: " << e.what() << std::endl;
   }
 
   return false; // return false if an error occurred
@@ -87,7 +87,7 @@ std::uintmax_t FileManager::size(const std::string& path) {
     }
   } catch (const fs::filesystem_error& e) {
     // If an error occurs, print an error message and return 0
-    std::cerr << "Error getting file or directory size: " << e.what() << std::endl;
+    std::cerr << "\nError getting file or directory size: " << e.what() << std::endl;
   }
 
   return 0; // return 0 if an error occurred

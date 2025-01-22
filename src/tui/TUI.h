@@ -26,9 +26,10 @@ public:
 
   /**
    * @brief Run the text-based user interface
+   * @param path The path to the directory to display, defaults to the current directory
    * @return void
    */
-  void run();
+  void run(std::string path);
 
 private:
   // Helper functions

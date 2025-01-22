@@ -35,10 +35,13 @@
 
 namespace tui = linux_file_manager::tui;
 
-int main() {
+int main(int argc, char *argv[]) {
+  // Set the initial path
+  std::string path = argc > 1 ? argv[1] : ".";
+
   // Create a new text-based user interface
-  tui::TUI tui;
-  tui.run(); // Run the text-based user interface
+  tui::TUI tui = tui::TUI();
+  tui.run(path); // Run the text-based user interface
 
   return 0;
 }
