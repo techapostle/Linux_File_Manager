@@ -1,6 +1,7 @@
 #ifndef TUI_H
 #define TUI_H
 
+#include <vector>
 #include <string>
 #include <cstdint>
 
