@@ -148,23 +148,17 @@ std::string TUI::handleUserInput(const std::string& currentPath, int key) {
     // Move the selection down
     selectedIndex = (selectedIndex + 1) % directoryContents.size();
   } else if (key == '\n') {
-    // call function to display file preview
-    // displayPreview(currentPath, directoryContents[selectedIndex]);
+    // Enter to navigate into a directory or display file information
+    if (!directoryContents.empty()) {
+      std::string selectedPath = directoryContents[selectedIndex];
+      if (FileManager::exists(selectedPath) && std::filesystem::is_directory(selectedPath)) { // Check if path is a directory
+        return selectedPath; // Return the selected directory path
+      } else {
+        // Display an error message if the selected path is not a directory
+        throw std::runtime_error("Selected item is not a directory. File preview is not yet supported.");
+      }
+    }
   }
-  // } else if (key == '\n') {
-  //   // Enter to navigate into a directory or display file information
-  //   if (!directoryContents.empty()) {
-  //     std::string selectedPath = directoryContents[selectedIndex];
-  //     if (FileManager::exists(selectedPath) && std::filesystem::is_directory(selectedPath)) { // Check if path is a directory
-  //       return selectedPath; // Return the selected directory path
-  //     } else {
-  //       // Display file information
-  //       mvprintw(directoryContents.size() + 2, 0, "File: %s", selectedPath.c_str());
-  //       mvprintw(directoryContents.size() + 3, 0, "Size: %lu bytes", FileManager::size(selectedPath));
-  //       getch();
-  //     }
-  //   }
-  // }
 
   return currentPath; // Return the current path if no navigation occurred
 }
