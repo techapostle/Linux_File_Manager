@@ -28,12 +28,17 @@
 
 #include <iostream> // for error reporting
 
-#include "core/FileManager.h" // include the FileManager class
+#include "tui/TUI.h" // include the TUI class
 
 #define __BASIC_MAIN__ // uncomment this line to enable main
 #ifdef __BASIC_MAIN__
 
+namespace tui = linux_file_manager::tui;
+
 int main() {
+  // Create a new text-based user interface
+  tui::TUI tui;
+  tui.run(); // Run the text-based user interface
 
   return 0;
 }
@@ -44,6 +49,8 @@ int main() {
 
 // #define __BASIC_LFM_TEST__ // uncomment this line to enable testing
 #ifdef __BASIC_LFM_TEST__
+
+#include "core/FileManager.h" // include the FileManager class
 
 int main(int argc, char *argv[]) {
   using namespace linux_file_manager::core;
