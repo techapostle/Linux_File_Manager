@@ -53,29 +53,11 @@ void TUI::run(std::string path) {
     // Handle user input
     int key = getch(); // Get a character from the user
 
-    if (key == 'q') {
+    if (key == 'q')
       break; // Exit the loop if the user presses 'q'
-    } else if (key == KEY_UP) {
-      // Move the selection up
-      selectedIndex = (selectedIndex - 1 + directoryContents.size()) % directoryContents.size();
-    } else if (key == KEY_DOWN) {
-      // Move the selection down
-      selectedIndex = (selectedIndex + 1) % directoryContents.size() % directoryContents.size();
-    } else if (key == '\n') {
-      // Enter to navigate into a directory or display file information
-      if (!directoryContents.empty()) {
-        std::string selectedPath = directoryContents[selectedIndex];
-        if (FileManager::exists(selectedPath) && std::filesystem::is_directory(selectedPath)) { // Check if path is a directory
-          currentPath = selectedPath; // Update the current path
-          selectedIndex = 0; // Reset the selection index
-        } else {
-          // Display file information
-          mvprintw(directoryContents.size() + 2, 0, "File: %s", selectedPath.c_str());
-          mvprintw(directoryContents.size() + 3, 0, "Size: %lu bytes", FileManager::size(selectedPath));
-          getch();
-        }
-      }
-    }
+    
+    // Delegate input handling to `handleUserInput`
+    currentPath = handleUserInput(currentPath, key);
   }
 }
 
@@ -107,10 +89,33 @@ void TUI::displayDirectory(const std::string& path) {
   refresh();
 }
 
+std::string TUI::handleUserInput(const std::string& currentPath, int key) {
+  // Handle user input
+  if (key == 'q') {
+    return ""; // Return an empty string to indicate that the user wants to quit
+  } else if (key == KEY_UP) {
+    // Move the selection up
+    selectedIndex = (selectedIndex - 1 + directoryContents.size()) % directoryContents.size();
+  } else if (key == KEY_DOWN) {
+    // Move the selection down
+    selectedIndex = (selectedIndex + 1) % directoryContents.size();
+  } else if (key == '\n') {
+    // Enter to navigate into a directory or display file information
+    if (!directoryContents.empty()) {
+      std::string selectedPath = directoryContents[selectedIndex];
+      if (FileManager::exists(selectedPath) && std::filesystem::is_directory(selectedPath)) { // Check if path is a directory
+        return selectedPath; // Return the selected directory path
+      } else {
+        // Display file information
+        mvprintw(directoryContents.size() + 2, 0, "File: %s", selectedPath.c_str());
+        mvprintw(directoryContents.size() + 3, 0, "Size: %lu bytes", FileManager::size(selectedPath));
+        getch();
+      }
+    }
+  }
 
-// void TUI::handleUserInput(const std::string& path) {
-  
-// }
+  return currentPath; // Return the current path if no navigation occurred
+}
 
 } // namespace tui
 } // namespace linux_file_manager

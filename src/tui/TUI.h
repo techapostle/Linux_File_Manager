@@ -53,12 +53,13 @@ private:
    */
   void cleanup();
 
-  // /**
-  //  * @brief Handle user input
-  //  * @param path The path to the current directory
-  //  * @return void
-  //  */
-  // void handleUserInput(const std::string& path);
+  /**
+   * @brief Handle user input
+   * @param currentPath The current directory path
+   * @param key The key pressed by the user
+   * @return void
+   */
+  std::string handleUserInput(const std::string& currentPath, int key);
 
   // State variables
   std::vector<std::string> directoryContents; // The names of the files and directories in the current directory
