@@ -12,7 +12,7 @@ using namespace linux_file_manager::core;
 
 namespace fs = std::filesystem;
 
-TUI::TUI() : selectedIndex(0) {
+TUI::TUI() : selectedIndex(1) {
   initialize();
 }
 
@@ -54,26 +54,26 @@ void TUI::run(std::string path) {
   std::string errorMessage;
 
   while (true) {
-    // Refresh the directory contents
-    directoryContents = FileManager::listDirectory(currentPath);
-
-    // Add the parent directory entry if not at the root
-    if (currentPath != "/") {
-      directoryContents.insert(directoryContents.begin(), currentPath + "/..");
-    }
-
-    // Render the TUI layout
-    displayHeader(currentPath); // Display the header with program information and the current directory
-    displayDirectory(currentPath); // Display the directory pane and file details
-    displayFooter(errorMessage); // Display the footer with error messages and legend keys
-
-    // Get user input and handle it
-    int key = getch();
-    if (key == 'q') {
-      break; // Quit the program
-    }
-
     try {
+      // Refresh the directory contents
+      directoryContents = FileManager::listDirectory(currentPath);
+
+      // Add the parent directory entry if not at the root
+      if (currentPath != "/") {
+        directoryContents.insert(directoryContents.begin(), fs::path(currentPath).parent_path().string());
+      }
+
+      // Render the TUI layout
+      displayHeader(currentPath); // Display the header with program information and the current directory
+      displayDirectory(currentPath); // Display the directory pane and file details
+      displayFooter(errorMessage); // Display the footer with error messages and legend keys
+
+      // Get user input and handle it
+      int key = getch();
+      if (key == 'q') {
+        break; // Quit the program
+      }
+    
       currentPath = handleUserInput(currentPath, key);
       errorMessage.clear(); // Clear error messages after successful input handling
     } catch (const std::exception& e) {
@@ -85,15 +85,20 @@ void TUI::run(std::string path) {
 void TUI::displayDirectory(const std::string& currentPath) {
   clear(); // Clear the screen
 
-  // Render the top header
+  // Render the header again to ensure it is visible
   displayHeader(currentPath);
 
   // Render the left pane (directory listings)
   int leftPaneWidth = COLS / 2; // Half the screen width
-  std::string displayName;
   for (size_t i = 0; i < directoryContents.size(); ++i) {
-    // Extract the filename or display name from the full path
-    displayName = fs::path(directoryContents[i]).filename().string();
+    std::string displayName;
+    if (i == 0 && currentPath != "/") {
+      // Display ".." for the parent directory
+      displayName = "..";
+    } else {
+      // Display filenames for other entries
+      displayName = fs::path(directoryContents[i]).filename().string();
+    }
 
     if (i == selectedIndex) {
       // Highlight the selected item
@@ -120,6 +125,7 @@ void TUI::displayDirectory(const std::string& currentPath) {
     }
   }
 }
+
 
 void TUI::displayFooter(const std::string& errorMessage) {
   int bottomRow = LINES - 3; // Three lines from the bottom
@@ -152,6 +158,8 @@ std::string TUI::handleUserInput(const std::string& currentPath, int key) {
     if (!directoryContents.empty()) {
       std::string selectedPath = directoryContents[selectedIndex];
       if (FileManager::exists(selectedPath) && std::filesystem::is_directory(selectedPath)) { // Check if path is a directory
+        // Reset the selected index
+        selectedIndex = 1;
         return selectedPath; // Return the selected directory path
       } else {
         // Display an error message if the selected path is not a directory

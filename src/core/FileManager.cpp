@@ -18,7 +18,7 @@ std::vector<std::string> FileManager::listDirectory(const std::string& path) {
     // Iterate over the contents of the directory specified by the path
     for (const auto& entry : fs::directory_iterator(path)) {
       // Add the full path of the file or directory to the contents vector
-      contents.push_back(entry.path().string());
+      contents.push_back(fs::canonical(entry.path().string()));
     }
   } catch (const fs::filesystem_error& e) {
     // If an error occurs, print an error message
