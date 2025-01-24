@@ -98,6 +98,10 @@ void TUI::displayDirectory(const std::string& currentPath) {
     } else {
       // Display filenames for other entries
       displayName = fs::path(directoryContents[i]).filename().string();
+      // if the name is too long, truncate it and add "..." at the end
+      if (displayName.size() > leftPaneWidth - 1) {
+        displayName = displayName.substr(0, leftPaneWidth - 4) + "...";
+      }
     }
 
     if (i == selectedIndex) {
@@ -116,6 +120,7 @@ void TUI::displayDirectory(const std::string& currentPath) {
   // Render the right pane (file details)
   if (selectedIndex < directoryContents.size()) {
     std::string selectedPath = directoryContents[selectedIndex];
+    selectedPath = fs::canonical(selectedPath).string(); // Get the canonical path
     if (FileManager::exists(selectedPath)) {
       attron(COLOR_PAIR(3));
       mvprintw(3, leftPaneWidth + 2, "File Info:");
