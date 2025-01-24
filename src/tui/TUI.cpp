@@ -12,7 +12,7 @@ using namespace linux_file_manager::core;
 
 namespace fs = std::filesystem;
 
-TUI::TUI() : selectedIndex(1) {
+TUI::TUI() : selectedIndex(0) {
   initialize();
 }
 
@@ -55,12 +55,15 @@ void TUI::run(std::string path) {
 
   while (true) {
     try {
+      clear(); // Clear the screen
+
       // Refresh the directory contents
       directoryContents = FileManager::listDirectory(currentPath);
 
       // Add the parent directory entry if not at the root
       if (currentPath != "/") {
         directoryContents.insert(directoryContents.begin(), fs::path(currentPath).parent_path().string());
+        selectedIndex = 1; // Select the first item in the list
       }
 
       // Render the TUI layout
@@ -83,7 +86,7 @@ void TUI::run(std::string path) {
 }
 
 void TUI::displayDirectory(const std::string& currentPath) {
-  clear(); // Clear the screen
+  // clear(); // Clear the screen
 
   // Render the header again to ensure it is visible
   displayHeader(currentPath);
