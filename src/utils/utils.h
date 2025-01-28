@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <string>
 #include <cstdint>
 #include <filesystem>
@@ -33,3 +36,5 @@ void saveSizeCache(const std::string& path, const std::unordered_map<std::string
 
 } // namespace utils
 } // namespace linux_file_manager
+
+#endif // UTILS_H
