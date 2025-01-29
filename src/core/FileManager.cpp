@@ -4,20 +4,16 @@
 #include <unordered_map> // for std::unordered_map
 
 #include "FileManager.h" // include the FileManager class
+#include "../utils/utils.h" // include the SizeCache struct and utility functions
 
 namespace fs = std::filesystem;
+namespace utils = linux_file_manager::utils;
 
 namespace linux_file_manager {
 namespace core {
 
-// Cache entry structure
-struct CacheEntry {
-  std::uintmax_t size;                     // Cached size
-  std::filesystem::file_time_type time;    // Last modification time
-};
-
 // Global cache for directory sizes
-std::unordered_map<std::string, CacheEntry> sizeCache;
+std::unordered_map<std::string, utils::SizeCache> sizeCache;
 
 std::vector<std::string> FileManager::listDirectory(const std::string& path) {
   // Create a vector to store the names of the files and directories within the directory specified by the path
