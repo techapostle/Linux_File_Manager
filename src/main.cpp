@@ -26,8 +26,6 @@
  */
 
 
-#include <iostream> // for error reporting
-
 #include "tui/TUI.h" // include the TUI class
 
 #define __BASIC_MAIN__ // uncomment this line to enable main
@@ -52,6 +50,8 @@ int main(int argc, char *argv[]) {
 
 // #define __BASIC_LFM_TEST__ // uncomment this line to enable testing
 #ifdef __BASIC_LFM_TEST__
+
+#include <iostream> // for error reporting
 
 #include "core/FileManager.h" // include the FileManager class
 

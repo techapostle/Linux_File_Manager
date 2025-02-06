@@ -63,7 +63,6 @@ void TUI::run(std::string path) {
       // Add the parent directory entry if not at the root
       if (currentPath != "/") {
         directoryContents.insert(directoryContents.begin(), fs::path(currentPath).parent_path().string());
-        selectedIndex = 1; // Select the first item in the list
       }
 
       // Render the TUI layout
@@ -152,7 +151,7 @@ void TUI::displayFooter(const std::string& errorMessage) {
 }
 
 std::string TUI::handleUserInput(const std::string& currentPath, int key) {
-  // Handle user input
+  // Handle user input (vim bindings)
   if (key == 'q') {
     return ""; // Return an empty string to indicate that the user wants to quit
   } else if (key == KEY_UP) {
