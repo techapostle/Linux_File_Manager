@@ -84,9 +84,9 @@ std::uintmax_t FileManager::size(const std::string& path) {
     if (fs::is_symlink(path) || fs::is_other(path)) {
       return 0; // Return 0 for symbolic links and special files
     }
-    if (path == "/proc" || path == "/sys") { // May be redundant, but just in case
-      return 0; // Return 0 for /proc and /sys
-    }
+    // if (path == "/proc" || path == "/sys") { // May be redundant, but just in case
+    //   return 0; // Return 0 for /proc and /sys
+    // }
 
     // Check if the path is a directory
     if (fs::is_directory(path)) {
